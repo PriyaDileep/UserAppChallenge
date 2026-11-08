@@ -1,7 +1,7 @@
 // UsersViewModel.swift
 
 import Foundation
-import Combine
+import Observation
 
 enum UsersState {
     case idle
@@ -10,8 +10,10 @@ enum UsersState {
     case failed(Error)
 }
 
-final class UsersViewModel: ObservableObject {
-    @Published private(set) var state: UsersState = .idle
+@MainActor
+@Observable
+final class UsersViewModel {
+    private(set) var state: UsersState = .idle
 
     private let apiClient: UsersAPIClient
 
