@@ -15,17 +15,17 @@ enum UsersState {
 final class UsersViewModel {
     private(set) var state: UsersState = .idle
 
-    private let apiClient: UsersAPIClient
+    private let usersService: any UsersServiceProtocol
 
-    init(apiClient: UsersAPIClient) {
-        self.apiClient = apiClient
+    init(usersService: any UsersServiceProtocol = UsersAPIClient()) {
+        self.usersService = usersService
     }
 
     func load() async {
         state = .loading
 
         do {
-            let users = try await apiClient.fetchUsers()
+            let users = try await usersService.fetchUsers()
             state = .loaded(users)
         } catch {
             state = .failed(error)

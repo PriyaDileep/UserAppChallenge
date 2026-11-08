@@ -3,7 +3,8 @@
 import SwiftUI
 
 struct UsersListView: View {
-    @State private var viewModel = UsersViewModel(apiClient: UsersAPIClient())
+    @State private var viewModel = UsersViewModel()
+    
 
     var body: some View {
         NavigationStack {
