@@ -7,11 +7,7 @@ struct UsersAPIClient {
         let url = URL(string: "https://jsonplaceholder.typicode.com/users")!
         let (data, _) = try await URLSession.shared.data(from: url)
 
-        struct Response: Decodable {
-            let users: [User]
-        }
-
-        let response = try JSONDecoder().decode(Response.self, from: data)
-        return response.users
+        let response = try JSONDecoder().decode([User].self, from: data)
+        return response
     }
 }
